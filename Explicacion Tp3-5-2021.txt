@@ -33,3 +33,62 @@ Posibles clases:
 	→orden
 	→direccion
 	→carrito
+
+Diagramas:
+
+Usuario
+	Id_usuario int
+	Nombre string
+	Apellido string
+	Usuario/Email string 
+	Pass	string 
+	Carro Carrito
+	Token string 
+
+
+Producto
+	Id_product int
+	Produt_name string
+	Categoria string
+	Detalle string
+	Precio int
+	Costo int 
+	Stock int 
+
+
+Carrito(a la hora de cargar el carrito hay que tener en cuenta que los indices de los arrays
+		deben coincidir entre si)
+	Id_carrito int
+	Lista_product Producto[]
+	Lista_cantidad int[]
+	lista_Precio_u int[]
+
+
+Orden
+	Id_orden int 
+	Detalle[
+		Producto string
+		Cantidad int
+		Precio_u int
+		]
+	Total	int
+
+
+Direccion
+	Ciudad string
+	Calle string
+	Numero int
+	Barrio string
+
+
+
+	
+	
+
+
+	
+
+
+
+
+
