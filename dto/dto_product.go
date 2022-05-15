@@ -1,10 +1,11 @@
 package dto
 
 type ProductDto struct {
-	IdProduct string  `json:"id_product"`
-	Name      string  `json:"name"`
-	Cost      float64 `json:"cost"`
-	Stock     float64 `json:"stock"`
+	IdProduct    string  `json:"id_product"`
+	Name_product string  `json:"name_product"`
+	Cost         float64 `json:"cost"`
+	Stock        float64 `json:"stock"`
+	Category     string  `json:"category"`
 
 	/*Name string `json:"name"`
 	UniversalCode string `json:"universal_code"`
