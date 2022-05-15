@@ -1,6 +1,6 @@
 package dto
 
-type User struct {
+type UserDto struct {
 	Id_user  string `json:"id_user"`
 	Name     string `json:"name"`
 	Lname    string `json:"lname"`
@@ -10,4 +10,4 @@ type User struct {
 	Token    string `json:"token"`
 }
 
-type Users []User
+type UsersDto []UserDto
