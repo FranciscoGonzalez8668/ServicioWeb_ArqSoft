@@ -3,16 +3,15 @@ package services
 import (
 	"pan/dto"
 	"pan/model"
-
 	//HAY QUE CAMBIAR ESTOS PATH
-	productCliente "mvc-go/clients/user"
-	"mvc-go/dto"
-	"mvc-go/model"
+	//	productCliente "mvc-go/clients/user"
+	//	"mvc-go/dto"
+	//	"mvc-go/model"
 )
 
 type productService struct{}
 
-//EL SERVICE SE COMINA CON EL MODEL (BUSINESS CLASSES) Y CONTROLLER(DTOS)
+//EL SERVICE SE COMUNICA CON EL MODEL (BUSINESS CLASSES) Y CONTROLLER(DTOS)
 type productServiceInterface interface {
 	GetProductByKeyCat(key string) dto.ProductDto /*e.Apierror*/
 	GetProductByKeyPro(cat string) dto.ProductDto /*e.ApiError*/
