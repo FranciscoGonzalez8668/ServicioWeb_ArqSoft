@@ -6,8 +6,8 @@ type UserDto struct {
 	Lname    string `json:"lname"`
 	Email    string `jsno:"email"`
 	Password string `json:"password"`
-	Cart     string `json:"cart"`
-	Token    string `json:"token"`
+	//Cart     string `json:"cart"`
+	//Token    string `json:"token"`
 }
 
 type UsersDto []UserDto

@@ -81,6 +81,64 @@ Direccion
 	Barrio string
 
 
+Header html
+carrito; buscar; login; 
+
+PANTALLAS
+1) LoginPantalla  donde se loguea el usuario
+	boton para loguear
+	2 campos para loguin y password 
+	
+	manda json contenga email y pasword 
+	espera json contenga id_usuario  y token esto es para poder setear las coockies correctamente me imagino
+
+
+2)Lista Productos    donde se buscan los productos debe tener 2 partes una con los productos filtrados por nombre y otra por categoria un cuadro de busqueda que 
+					lleve al GET "/product/:KeyPro" con un checkbox para elegir entre los dos metodos
+	checkbox BusByProduct/BusByCat
+	Debe por producto un boto agregar al carrito
+	clickear producto lleva a la descripcion detallada
+	Boton aumento cantidad 
+	campo para buscar
+
+	Coockies Con carrito guardar Id_product Cantidad
+
+	manda json keyword ^ bool categoria 
+	manda json product para entrar a la descripcion detallada 
+	espera json products 
+		
+3) Descripcion Producto	 (no relacion con back?)
+
+	por producto Boton agregar al carrito
+	Boton aumento cantidad 
+
+	Coockies Con carrito guardar Id_product Cantidad
+
+4) Carrito
+	Coockies ya almacenadas productos comprados id_usuario
+
+	Lista Productos comprados guardados en coockies
+	Boton Comprar 
+	Boton aumento cantidad 
+	Boton borrar todo
+
+	manda json Lista_id_product_Comprados ^ id_usuario  ^ precio_momento
+	espera json OK 
+
+	React 
+	traer los datos faltantes de los productos
+5) Compra Exitosa
+
+	Boton go home/ Continuar comprando
+
+6)Historial Compras
+	manda json id_usuario
+	espera json  ordenes 
+	
+
+
+	
+
 
 	
 	

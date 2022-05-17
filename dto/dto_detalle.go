@@ -1,9 +1,12 @@
 package dto
 
 type DetalleDto struct {
-	Name_product string  `json:"name_product"`
-	Price_det    float32 `json:"price_det"`
-	Cant_det     int     `json:"cant_det"`
+	Detalle_id_product string  `json:"id_product"`
+	Price_det          float32 `json:"price_det"`
+	Cant_det           int     `json:"cant_det"`
 }
 
-type DetallesDto []DetalleDto
+type DetallesDto struct {
+	Detalles_id_usuario string       `json:"id_usuario"`
+	DetalleArray        []DetalleDto `json:"detalles"`
+}
