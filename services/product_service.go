@@ -3,8 +3,9 @@ package services
 import (
 	"pan/dto"
 	"pan/model"
+
 	//HAY QUE CAMBIAR ESTOS PATH
-	//	productCliente "mvc-go/clients/user"
+	productCliente "servicioweb_arqsoft/clients/user"
 	//	"mvc-go/dto"
 	//	"mvc-go/model"
 )
@@ -22,10 +23,10 @@ var (
 )
 
 func init() {
-	ProductService = &productService{}
+	ProductService = &productService{} //no entiendo porque no funciona
 }
 
-func (s *productService) GetProductByKeyPro(key string) dto.ProductDto /*eApiError*/ {
+func (s *productService) GetProductByKeyPro(key string) (dto.ProductDto, eApiError) { //epi no importado pero en el mvc no esta
 
 	var product model.Product = productCliente.GetProductByKeyPro(key)
 	var productDto dto.ProductDto
@@ -42,7 +43,7 @@ func (s *productService) GetProductByKeyPro(key string) dto.ProductDto /*eApiErr
 	productDto.Name_product = product.Name_product
 	productDto.Cost = product.Cost
 	productDto.Stock = product.Stock
-	productDto.IdProduct = product.IdProdcut
+	productDto.Id_Product = product.Id_Product
 	productDto.Category = product.Category
 
 	return productDto, nil
@@ -51,7 +52,7 @@ func (s *productService) GetProductByKeyPro(key string) dto.ProductDto /*eApiErr
 
 func (s *productService) GetProductByKeyCat(cat string) dto.ProductsDto /*e.ApiError*/ {
 
-	var products model.products = productCliente.GetProductByKeyCat(cat)
+	var products model.Products = productCliente.GetProductByKeyCat(cat)
 	var usersDto dto.UsersDto
 
 }

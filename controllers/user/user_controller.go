@@ -2,7 +2,7 @@ package userController
 
 import (
 	"net/http"
-	"pan/dto"
+
 	"servicioweb_arqsoft/dto"
 
 	"github.com/gin-gonic/gin"

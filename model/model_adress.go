@@ -1,6 +1,6 @@
 package model
 
-type AdressDto struct {
+type Adress struct {
 	Id_adress    int    `gorm:"primaryKey"`
 	Street_Name  string `gorm:"type:varchar(350);not null"`
 	Number       int    `json:"type:int;not null"`
@@ -8,4 +8,4 @@ type AdressDto struct {
 	City         string `gorm:"type:varchar(350);not null`
 }
 
-type AdresssDto []AdressDto
+type Adresss []Adress

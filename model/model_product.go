@@ -1,7 +1,7 @@
 package model
 
-type ProductDto struct {
-	IdProduct    string  `gorm:"primaryKey"`
+type Product struct {
+	Id_Product   string  `gorm:"primaryKey"`
 	Name_product string  `gorm:"type:varchar(350);not null;unique"`
 	Cost         float64 `gorm:"type:float;not null"`
 	Stock        int     `gorm:"type:int"`
@@ -16,4 +16,4 @@ type ProductDto struct {
 
 }
 
-type ProductsDto []ProductDto
+type Products []Product
