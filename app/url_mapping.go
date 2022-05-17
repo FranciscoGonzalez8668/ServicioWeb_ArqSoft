@@ -2,15 +2,15 @@ package app
 
 import (
 	//adressController "mvc-go/controllers/adress"
-	productController "servicioweb_arqsoft/controllers/product"
-	userController "servicioweb_arqsoft/controllers/user"
+	productController "pan/controllers/product"
+	userController "pan/controllers/user"
 
 	log "github.com/sirupsen/logrus"
 )
 
 func mapUrls() {
 
-	router.GET("/login", userController.GetUser) //identificar el usuario ^ devolver una toquen
+	router.GET("/login", userController.LoginUser) //identificar el usuario ^ devolver una toquen
 
 	router.GET("/product/product/:KeyPro", productController.GetProductByName) // Busca productos por Palabra clave
 
