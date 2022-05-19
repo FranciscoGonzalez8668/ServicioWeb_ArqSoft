@@ -6,3 +6,7 @@ import (
 
 func GetProductByName(c *gin.Context) {
 }
+
+func GetProductByCat(c *gin.Context) {
+
+}

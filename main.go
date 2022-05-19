@@ -1,8 +1,8 @@
 package main
 
 import (
-	"mvc-go/app"
-	"mvc-go/db"
+	"pan/app"
+	"pan/db"
 )
 
 func main() {

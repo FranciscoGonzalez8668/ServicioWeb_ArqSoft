@@ -4,7 +4,7 @@ import (
 	userCliente "pan/clients/user"
 	"pan/dto"
 	"pan/model"
-	e "servicioweb_arqsoft/utils/errors"
+	e "pan/utils/errors"
 
 	"github.com/golang-jwt/jwt"
 )
@@ -12,7 +12,7 @@ import (
 type userService struct{}
 
 type userServiceInterface interface {
-	LoginUser(userDto dto.UserDto) (dto.Token, e.ApiError)
+	LoginUser(loginDto dto.LoginDto) (dto.Token, e.ApiError)
 }
 
 var (
