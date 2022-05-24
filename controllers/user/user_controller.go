@@ -12,6 +12,8 @@ import (
 	//"strconv"
 )
 
+var jwtKey = []byte("secret_key")
+
 func LoginUser(c *gin.Context) {
 	var loginDto dto.LoginDto
 	err := c.BindJSON(&loginDto)

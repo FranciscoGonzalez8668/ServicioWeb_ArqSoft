@@ -2,7 +2,7 @@ package product
 
 import (
 	"pan/dto"
-	"servicioweb_arqsoft/model"
+	"pan/model"
 
 	"github.com/jinzhu/gorm"
 	log "github.com/sirupsen/logrus"

@@ -4,7 +4,7 @@ import (
 	userCliente "pan/clients/user"
 	"pan/dto"
 	"pan/model"
-	e "servicioweb_arqsoft/utils/errors"
+	e "pan/utils/errors"
 
 	"github.com/golang-jwt/jwt"
 )

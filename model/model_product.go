@@ -16,5 +16,3 @@ type Product struct {
 	*/
 
 }
-
-type Products []Product
