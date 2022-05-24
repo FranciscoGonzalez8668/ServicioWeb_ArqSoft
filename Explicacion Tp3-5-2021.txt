@@ -115,14 +115,14 @@ PANTALLAS
 	Coockies Con carrito guardar Id_product Cantidad
 
 4) Carrito
-	Coockies ya almacenadas productos comprados id_usuario
+	Coockies ya almacenadas productos comprados id_usuario/token
 
 	Lista Productos comprados guardados en coockies
 	Boton Comprar 
 	Boton aumento cantidad 
 	Boton borrar todo
 
-	manda json Lista_id_product_Comprados ^ id_usuario  ^ precio_momento
+	manda json Lista_id_product_Comprados ^ token  ^ precio_momento
 	espera json OK 
 
 	React 

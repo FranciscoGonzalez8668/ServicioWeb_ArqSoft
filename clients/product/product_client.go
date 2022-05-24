@@ -20,15 +20,15 @@ func GetProductByName(key string) model.Product { //HOLA NICO SOY PANCHO CUCHA Q
 
 }
 
-//ACA DEBEMOS PASAR UN ARRAY DE PRODUCTOS , ABRIA QUE VER COMO COPIAR TODOS LOS QUE TIENEN X CATEGORIA
+//FUNCION LISTA
 func GetProductByCat(cat string) []model.Product {
 
-	var product []model.Product //DEBERIA SER UN ARRAY? PORQUE CONTIENE MUCHO YA QUE ES <> ????? hay que preguntar esto
+	var products []model.Product
 
-	Db.Where("cat <> ?", cat).Find(&product)
+	Db.Where("cat LIKE ?", cat).Find(&products)
 
-	log.Debug("Products", product)
+	log.Debug("Products", products)
 
-	return product
+	return products
 
 }
