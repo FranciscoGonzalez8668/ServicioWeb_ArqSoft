@@ -13,7 +13,7 @@ func GetProductByName(key string) model.Product { //HOLA NICO SOY PANCHO CUCHA Q
 	// SOLO UN PRODUCTO FIJATE DEBERIAMOS HACER QUE SE COPIEN TODOS LOS PRODUCTOS CON EL NOMBRE ESE
 	var product model.Product
 
-	Db.Where("key = ", key).First(&product)
+	Db.Where("key LIKE ? ", "%"+key+"%").First(&product)
 	log.Debug("Product: ", product)
 
 	return product
