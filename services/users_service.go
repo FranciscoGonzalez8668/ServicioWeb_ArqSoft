@@ -12,7 +12,7 @@ import (
 type userService struct{}
 
 type userServiceInterface interface {
-	LoginUser(userDto dto.UserDto) (dto.Token, e.ApiError)
+	LoginUser(loginDto dto.LoginDto) (dto.Token, e.ApiError)
 }
 
 var (
