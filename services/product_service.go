@@ -18,8 +18,8 @@ type productService struct{}
 
 //EL SERVICE SE COMUNICA CON EL MODEL (BUSINESS CLASSES) Y CONTROLLER(DTOS)
 type productServiceInterface interface {
-	GetProductByCat(key string) (dto.ProductDto, e.ApiError, int)
 	GetProductByName(Key string) (dto.ProductDto, e.ApiError)
+	GetProductByCat(key string) (dto.ProductsDto, e.ApiError)
 }
 
 var (
@@ -27,7 +27,7 @@ var (
 )
 
 func init() {
-	ProductService = &productService{} //no entiendo porque no funciona
+	ProductService = &productService{}
 }
 
 func (s *productService) GetProductByName(key string) (dto.ProductDto, e.ApiError) { //epi no importado pero en el mvc no esta
@@ -54,22 +54,22 @@ func (s *productService) GetProductByName(key string) (dto.ProductDto, e.ApiErro
 
 }
 
-func (s *productService) GetProductByCat(cat string) (dto.ProductsDto, e.ApiError, int) {
+func (s *productService) GetProductByCat(cat string) (dto.ProductsDto, e.ApiError) {
 
-	var products model.Products = productCliente.GetProductByCat(cat) //LA FUNCION DE PRODUCT CLIENTE NO ESTA BIEN HECHA SE DEBE ESPERAR UN ARRYA DE PRODUCTOS
-	var productsDto dto.ProductsDto
+	var product []model.Product = productCliente.GetProductByCat(cat) //LA FUNCION DE PRODUCT CLIENTE NO ESTA BIEN HECHA SE DEBE ESPERAR UN ARRYA DE PRODUCTOS
+	var productDto []dto.ProductDto
 
-	var matchProduct int = len(products)
+	var matchProduct int = len(product)
 
-	for i := 0; i < matchProduct; i++ {
-		productsDto[i].Category = products[i].Category
-		productsDto[i].Id_Product = products[i].Id_Product
-		productsDto[i].Name_product = products[i].Name_product
-		productsDto[i].Price = products[i].Price
-		productsDto[i].Stock = products[i].Stock
+	for i := 0; i < matchProduct; i++ { // guardar datos en productDto[] para devolver al cliente
+		productDto[i].Category = product[i].Category
+		productDto[i].Id_Product = product[i].Id_Product
+		productDto[i].Name_product = product[i].Name_product
+		productDto[i].Price = product[i].Price
+		productDto[i].Stock = product[i].Stock
 
 	}
 
-	return productsDto, nil, matchProduct
+	return productDto, nil
 
 }

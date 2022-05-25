@@ -10,7 +10,9 @@ import (
 
 func mapUrls() {
 
-	router.GET("/login", userController.LoginUser) //identificar el usuario ^ devolver una toquen
+	router.GET("/OK", userController.OK)
+
+	router.POST("/login", userController.LoginUser) //identificar el usuario ^ devolver una toquen
 
 	router.GET("/product/product/:KeyPro", productController.GetProductByName) // Busca productos por Palabra clave
 

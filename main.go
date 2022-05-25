@@ -2,10 +2,10 @@ package main
 
 import (
 	"pan/app"
-	"pan/db"
+	//"pan/db"
 )
 
 func main() {
-	db.StartDbEngine()
+	//db.StartDbEngine()
 	app.StartRoute()
 }

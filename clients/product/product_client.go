@@ -21,11 +21,17 @@ func GetProductByName(key string) model.Product { //HOLA NICO SOY PANCHO CUCHA Q
 }
 
 //FUNCION LISTA
-func GetProductByCat(cat string) []model.Product {
+//
+//Params: 	string
+//Return:	array model.producto
+//Proces:	Busca en BD productos con categoria @params@
+//
+//
+func GetProductByCat(cat string) []model.Product { //
 
 	var products []model.Product
 
-	Db.Where("cat LIKE ?", cat).Find(&products)
+	Db.Where("cat LIKE ?", cat+"%").Find(&products)
 
 	log.Debug("Products", products)
 

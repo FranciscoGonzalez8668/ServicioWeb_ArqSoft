@@ -1,6 +1,7 @@
 package userController
 
 import (
+	"fmt"
 	"net/http"
 	"pan/dto"
 
@@ -14,7 +15,12 @@ import (
 
 var jwtKey = []byte("secret_key")
 
+func OK(c *gin.Context) {
+	c.JSON(http.StatusOK, "OK")
+}
+
 func LoginUser(c *gin.Context) {
+	fmt.Println("login")
 	var loginDto dto.LoginDto
 	err := c.BindJSON(&loginDto)
 	if err != nil {
