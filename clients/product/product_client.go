@@ -9,15 +9,15 @@ import (
 
 var Db *gorm.DB
 
-func GetProductByName(key string) model.Product { //HOLA NICO SOY PANCHO CUCHA QUE BUSQUE LA PALABRA IGUAL O PARECIDA?? Y ADEMAS ESO COMPLICA PORQUE ESTAS PASANDO
-	// SOLO UN PRODUCTO FIJATE DEBERIAMOS HACER QUE SE COPIEN TODOS LOS PRODUCTOS CON EL NOMBRE ESE
+//FUNCION LISTA
+
+func GetProductByName(key string) model.Product {
 	var product model.Product
 
 	Db.Where("key LIKE ? ", "%"+key+"%").First(&product)
 	log.Debug("Product: ", product)
 
 	return product
-
 }
 
 //FUNCION LISTA

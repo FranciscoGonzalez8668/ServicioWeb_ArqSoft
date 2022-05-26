@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	userCliente "pan/clients/user"
 	"pan/dto"
 	"pan/model"
@@ -31,6 +32,7 @@ func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.Token, e.ApiError) {
 	var tokenDto dto.Token
 
 	if user.Id_user == 0 {
+		fmt.Println("id = 0")
 		return tokenDto, e.NewBadRequestApiError("User not found")
 	}
 

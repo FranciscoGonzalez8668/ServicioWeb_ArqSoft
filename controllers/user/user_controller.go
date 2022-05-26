@@ -1,7 +1,7 @@
 package userController
 
 import (
-	"fmt"
+	//"fmt"
 	"net/http"
 	"pan/dto"
 
@@ -20,7 +20,6 @@ func OK(c *gin.Context) {
 }
 
 func LoginUser(c *gin.Context) {
-	fmt.Println("login")
 	var loginDto dto.LoginDto
 	err := c.BindJSON(&loginDto)
 	if err != nil {
@@ -30,6 +29,7 @@ func LoginUser(c *gin.Context) {
 	}
 
 	tokenDto, er := service.UserService.LoginUser(loginDto)
+
 	if er != nil {
 		c.JSON(er.Status(), er)
 		return

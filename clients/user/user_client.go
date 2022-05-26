@@ -16,7 +16,7 @@ var Db *gorm.DB
 func GetUserByEmail(LoginDto dto.LoginDto) model.User {
 	var user model.User
 
-	if user.Email != "W" && user.Password != "abc" {
+	if LoginDto.Email != "W" || LoginDto.Password != "abc" {
 		user.Id_user = 0
 		user.Email = "notfound"
 		user.Lname = "nil"
@@ -24,6 +24,7 @@ func GetUserByEmail(LoginDto dto.LoginDto) model.User {
 		user.Password = ""
 		return user
 	}
+	user.Id_user = 1
 	user.Email = LoginDto.Email
 	user.Lname = "Gonzalez"
 	user.Name = "Francisco"
