@@ -14,7 +14,7 @@ func mapUrls() {
 
 	router.POST("/login", userController.LoginUser) //identificar el usuario ^ devolver una toquen
 
-	router.GET("/product/product/:KeyPro", productController.GetProductByName) // Busca productos por Palabra clave
+	router.POST("/product/product/:KeyPro", productController.GetProductByName) // Busca productos por Palabra clave
 
 	router.POST("/compra/add") //ordenController.NewOrder) //Debe crear la nueva orden verificar cantidades
 
@@ -22,7 +22,7 @@ func mapUrls() {
 
 	router.GET("/User/OrH") //userContrller.GetHistory) //Devolver compras por user
 
-	router.GET("/product/cat/:KeyCat") //product.Controller.GetProductByCat)//Traer Productos por Categoria
+	router.POST("/product/cat/:KeyCat", productController.GetProductByCat) //product.Controller.GetProductByCat)//Traer Productos por Categoria
 
 	log.Info("Finishing mappings configurations")
 

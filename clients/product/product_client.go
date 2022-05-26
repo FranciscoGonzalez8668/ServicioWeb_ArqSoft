@@ -1,6 +1,7 @@
 package product
 
 import (
+	"fmt"
 	"pan/model"
 
 	"github.com/jinzhu/gorm"
@@ -29,12 +30,23 @@ func GetProductByName(key string) model.Product {
 //
 func GetProductByCat(cat string) []model.Product { //
 
-	var products []model.Product
+	var products = make([]model.Product, 1)
+	fmt.Println("array length: ", len(products))
+	for j := 0; j < 2; j++ {
+		fmt.Println("se entra ford client i= ", j)
+		products[j].Id_Product = j
+		products[j].Category = "electronico"
+		products[j].Descripcion = "computadora lenovo"
+		products[j].Name_product = "Lenovo Computador"
+		products[j].Price = 3.25
+		products[j].Stock = 1
+	}
+	fmt.Println("array created")
 
-	Db.Where("cat LIKE ?", cat+"%").Find(&products)
+	/*Db.Where("cat LIKE ?", cat+"%").Find(&products)
 
 	log.Debug("Products", products)
-
+	*/
 	return products
 
 }

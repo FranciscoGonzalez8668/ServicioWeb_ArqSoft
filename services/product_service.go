@@ -5,6 +5,7 @@ import (
 	//HAY QUE CAMBIAR ESTOS PATH
 
 	//"log"
+	"fmt"
 	productCliente "pan/clients/product"
 	"pan/dto"
 	"pan/model"
@@ -58,6 +59,8 @@ func (s *productService) GetProductByCat(cat string) (dto.ProductsDto, e.ApiErro
 
 	var product []model.Product = productCliente.GetProductByCat(cat) //LA FUNCION DE PRODUCT CLIENTE NO ESTA BIEN HECHA SE DEBE ESPERAR UN ARRYA DE PRODUCTOS
 	var productDto []dto.ProductDto
+
+	fmt.Println("client copio bien")
 
 	var matchProduct int = len(product)
 

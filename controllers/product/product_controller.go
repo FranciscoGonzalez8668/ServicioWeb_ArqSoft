@@ -1,6 +1,7 @@
 package productController
 
 import (
+	"fmt"
 	"net/http"
 	"pan/dto"
 	service "pan/services"
@@ -36,10 +37,10 @@ func GetProductByCat(c *gin.Context) {
 	cat := c.Param("KeyCat")
 
 	productsDto, err := service.ProductService.GetProductByCat(cat)
+	fmt.Println("todas las consultas ok")
 	if err != nil {
 		c.JSON(err.Status(), err)
 		return
 	}
 	c.JSON(http.StatusOK, productsDto)
-	c.JSON(http.StatusOK, "")
 }
