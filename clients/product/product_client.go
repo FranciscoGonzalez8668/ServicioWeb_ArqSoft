@@ -30,16 +30,17 @@ func GetProductByName(key string) model.Product {
 //
 func GetProductByCat(cat string) []model.Product { //
 
-	var products = make([]model.Product, 1)
-	fmt.Println("array length: ", len(products))
+	var products []model.Product
+	var productAux model.Product
 	for j := 0; j < 2; j++ {
 		fmt.Println("se entra ford client i= ", j)
-		products[j].Id_Product = j
-		products[j].Category = "electronico"
-		products[j].Descripcion = "computadora lenovo"
-		products[j].Name_product = "Lenovo Computador"
-		products[j].Price = 3.25
-		products[j].Stock = 1
+		productAux.Id_Product = j
+		productAux.Category = "electronico"
+		productAux.Descripcion = "computadora lenovo"
+		productAux.Name_product = "Lenovo Computador"
+		productAux.Price = 3.25
+		productAux.Stock = 1
+		products = append(products, productAux)
 	}
 	fmt.Println("array created")
 
