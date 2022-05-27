@@ -6,6 +6,7 @@ type ProductDto struct {
 	Price        float64 `json:"cost"`
 	Stock        int     `json:"stock"`
 	Category     string  `json:"category"`
+	Descripcion  string  `json:"descripcion"`
 
 	/*Name string `json:"name"`
 	UniversalCode string `json:"universal_code"`

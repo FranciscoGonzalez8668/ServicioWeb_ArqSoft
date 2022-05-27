@@ -60,17 +60,19 @@ func (s *productService) GetProductByCat(cat string) (dto.ProductsDto, e.ApiErro
 	var product []model.Product = productCliente.GetProductByCat(cat) //LA FUNCION DE PRODUCT CLIENTE NO ESTA BIEN HECHA SE DEBE ESPERAR UN ARRYA DE PRODUCTOS
 	var productDto []dto.ProductDto
 
+	var productAuxDto dto.ProductDto
+
 	fmt.Println("client copio bien")
 
-	var matchProduct int = len(product)
+	for i := 0; i < len(product); i++ { // guardar datos en productDto[] para devolver al cliente
 
-	for i := 0; i < matchProduct; i++ { // guardar datos en productDto[] para devolver al cliente
-		productDto[i].Category = product[i].Category
-		productDto[i].Id_Product = product[i].Id_Product
-		productDto[i].Name_product = product[i].Name_product
-		productDto[i].Price = product[i].Price
-		productDto[i].Stock = product[i].Stock
-
+		productAuxDto.Id_Product = product[i].Id_Product
+		productAuxDto.Category = product[i].Category
+		productAuxDto.Descripcion = product[i].Descripcion
+		productAuxDto.Name_product = product[i].Name_product
+		productAuxDto.Price = product[i].Price
+		productAuxDto.Stock = product[i].Stock
+		productDto = append(productDto, productAuxDto)
 	}
 
 	return productDto, nil
