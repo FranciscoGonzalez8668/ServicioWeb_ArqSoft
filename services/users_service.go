@@ -40,6 +40,7 @@ func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.Token, e.ApiError) {
 		token := jwt.New(jwt.SigningMethodHS256)
 		tokenString, _ := token.SignedString(jwtKey)
 		tokenDto.Token = tokenString
+		tokenDto.Id_user = user.Id_user
 	}
 	return tokenDto, nil
 }

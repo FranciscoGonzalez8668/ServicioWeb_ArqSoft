@@ -5,3 +5,10 @@ type Detalle struct {
 	Cantidad      int     `gorm:"type:int;not null"`
 	Precio_Moment float32 `gorm:"type:decimal(7,6);not null"`
 }
+
+type DetalleDet struct {
+	Id_detalle    int
+	Cantidad      int
+	Precio_Moment float32
+	Product_Name  string
+}
