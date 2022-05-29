@@ -7,7 +7,9 @@ type Order struct {
 }
 
 type OrderDet struct {
-	Id_order int
-	Total    float32
-	Detalles []DetalleDet
+	Id_order      int
+	Total         float32
+	Product       string
+	Cantidad      int
+	Precio_Moment float32
 }
