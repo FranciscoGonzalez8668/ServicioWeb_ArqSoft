@@ -4,6 +4,7 @@ import (
 	/*orderCliente "pan/clients/order"
 	 */"pan/dto" /*
 		"pan/model"*/
+
 	e "pan/utils/errors"
 )
 
@@ -35,3 +36,28 @@ func init() {
 
 	return
 }*/
+/*
+ ACA VA MI INTENTO
+func (s *orderService) OrderHistoy(idUser int) (dto.OrderDetDto, e.ApiError){
+
+
+	var orders []model.OrderDet
+	orders = orderCliente.GetHistory (idUser)
+	var orders dto.OrderDetDto
+
+	for(i=0, i</* cantidad de orderdenes , i++){
+
+		ordersDto[i] = [i]model.OrderDet
+
+
+
+	}
+
+	return ordersDto
+
+
+
+}
+
+
+*/

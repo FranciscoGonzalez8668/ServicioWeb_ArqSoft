@@ -4,6 +4,7 @@ import (
 	//"fmt"
 	"net/http"
 	"pan/dto"
+	"strconv"
 
 	service "pan/services"
 
@@ -52,5 +53,22 @@ func LoginUser(c *gin.Context) {
 	}
 	c.JSON(http.StatusCreated, "Login Succesful")
 	//falta seguir con cosas del servis que aun no estan implementadas
+
+}
+
+func GetUserByEmail(c *gin.Context) {
+
+	log.Debug("User email to load: " + c.Param("email"))
+	email, _ := strconv.Atoi(c.Param("id"))
+	var userDto dto.UserDto
+
+	userDto, err := service.UserService.GetUserById(email)
+
+	if err != nil {
+		c.JSON(err.Status(), err)
+		return
+	}
+
+	c.JSON(http.StatusOK, userDto)
 
 }
