@@ -6,6 +6,7 @@ import (
 	"pan/model"
 
 	"github.com/jinzhu/gorm"
+	log "github.com/sirupsen/logrus"
 )
 
 var Db *gorm.DB
@@ -45,4 +46,14 @@ func GetHistory(id_user int) ([]model.OrderDet, []int) {
 	Db.Model(&model.Order{}).Select("order.Id_Order").Joins("left join user on user.Id_Order = order.Id_order").Group("order.Id_Order").Find(&id_order)
 	return orderHistory, id_order
 
+}
+
+func NewOrder(order model.Order) model.Order {
+	result := Db.Create(&order)
+
+	if result.Error != nil {
+		log.Error("no se pudo crear en la base de datos")
+	}
+	log.Debug("order created: ", order.Id_order)
+	return order
 }

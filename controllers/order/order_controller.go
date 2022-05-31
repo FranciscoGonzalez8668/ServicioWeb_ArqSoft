@@ -2,6 +2,7 @@ package orderController
 
 import (
 	"net/http"
+	"pan/dto"
 	service "pan/services"
 	"strconv"
 
@@ -20,5 +21,26 @@ func GetHistory(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, ordersHistoryDto)
+
+}
+
+func NewOrder(c *gin.Context) {
+	var detallesDto []dto.DetalleDto
+	err := c.BindJSON(&detallesDto)
+
+	if err != nil {
+		log.Error(err.Error())
+		c.JSON(http.StatusBadRequest, err.Error())
+		return
+	}
+
+	order, er := service.OrderService.NewOrder(detallesDto)
+
+	if er != nil {
+		c.JSON(er.Status(), er)
+		return
+	}
+
+	c.JSON(http.StatusCreated, order)
 
 }

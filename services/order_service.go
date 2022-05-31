@@ -12,6 +12,7 @@ type orderService struct{}
 
 type orderServiceInterface interface {
 	OrderHistoy(int) ([]dto.OrderDetDto, e.ApiError)
+	NewOrder(detallesDto []dto.DetalleDto) (dto.OrderDto, e.ApiError)
 }
 
 var (
@@ -47,6 +48,22 @@ func (s *orderService) OrderHistoy(idUser int) ([]dto.OrderDetDto, e.ApiError) {
 
 	}
 	return ordersDto, nil
+}
+func (s *orderService) NewOrder(detalles []dto.DetalleDto) (dto.OrderDto, e.ApiError) {
+	var order model.Order
+	var total float32 = 0
+	for j := 0; j < len(detalles); j++ {
+		total = total + detalles[j].Price_det
+	}
+	order.Total = total
+
+	order = orderCliente.NewOrder(order)
+	//hay una diferencia entre los dto y los modelos ya que los dto tienen datos de otras tablas de la db
+	var orderDto dto.OrderDto
+	orderDto.Id_order = order.Id_order
+	orderDto.Total = order.Total
+
+	return orderDto, nil
 }
 
 /*
