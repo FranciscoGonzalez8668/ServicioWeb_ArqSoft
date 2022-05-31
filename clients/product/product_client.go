@@ -24,6 +24,15 @@ func GetProductByName(key string) []model.Product {
 	return products
 }
 
+func GetProductById(id_product int) model.Product {
+	var product model.Product
+
+	Db.Where("id_product = ?").First(&product)
+	log.Debug("Product: ", product)
+
+	return product
+}
+
 //FUNCION LISTA
 //
 //Params: 	string

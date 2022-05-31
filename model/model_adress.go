@@ -7,6 +7,7 @@ type Adress struct {
 	Neighborhood string `gorm:"type:varchar(350)"`
 	City         string `gorm:"type:varchar(350);not null"`
 	Dep          string `gorm:"type:varchar(20)"`
+	User         User   `gorm:"type:int;not null"`
 	// hace falta poner el id usuaurio ya que se relacionan?
 }
 

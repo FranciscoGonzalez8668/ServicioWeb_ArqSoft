@@ -16,7 +16,7 @@ func GetProductByName(c *gin.Context) {
 
 	name := c.Param("name")
 
-	var productDto dto.ProductDto
+	var productDto dto.ProductsDto
 
 	productDto, err := service.ProductService.GetProductByName(name)
 

@@ -45,7 +45,7 @@ func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.Token, e.ApiError) {
 	return tokenDto, nil
 }
 
-func (s *userService) GetUserByEmail(email string) (dto.UserDto, e.ApiError) {
+/*func (s *userService) GetUserByEmail(email string) (dto.UserDto, e.ApiError) {
 
 	var user model.User = userCliente.GetUserByEmail(email)
 	var userDto dto.UserDto
@@ -54,7 +54,7 @@ func (s *userService) GetUserByEmail(email string) (dto.UserDto, e.ApiError) {
 	if user.Email == nil{
 
 	}
-	*/
+
 
 	userDto.Name = user.Name
 	userDto.Lname = user.Lname
@@ -63,4 +63,4 @@ func (s *userService) GetUserByEmail(email string) (dto.UserDto, e.ApiError) {
 
 	return userDto, nil
 
-}
+}*/

@@ -4,7 +4,6 @@ import (
 	//"fmt"
 	"net/http"
 	"pan/dto"
-	"strconv"
 
 	service "pan/services"
 
@@ -56,7 +55,7 @@ func LoginUser(c *gin.Context) {
 
 }
 
-func GetUserByEmail(c *gin.Context) {
+/*func GetUserByEmail(c *gin.Context) {
 
 	log.Debug("User email to load: " + c.Param("email"))
 	email, _ := strconv.Atoi(c.Param("id"))
@@ -71,4 +70,4 @@ func GetUserByEmail(c *gin.Context) {
 
 	c.JSON(http.StatusOK, userDto)
 
-}
+}*/

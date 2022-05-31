@@ -9,7 +9,6 @@ import (
 	productCliente "pan/clients/product"
 	"pan/dto"
 	"pan/model"
-	"strings"
 
 	//	"mvc-go/dto"
 	//	"mvc-go/model"
@@ -20,7 +19,7 @@ type productService struct{}
 
 //EL SERVICE SE COMUNICA CON EL MODEL (BUSINESS CLASSES) Y CONTROLLER(DTOS)
 type productServiceInterface interface {
-	GetProductByName(Key string) (dto.ProductDto, e.ApiError)
+	GetProductByName(Key string) (dto.ProductsDto, e.ApiError)
 	GetProductByCat(key string) (dto.ProductsDto, e.ApiError)
 }
 
@@ -33,16 +32,13 @@ func init() {
 
 }
 
-func (s *productService) GetProductByName(key string) (dto.ProductDto, e.ApiError) {
+func (s *productService) GetProductByName(key string) (dto.ProductsDto, e.ApiError) {
 
-	var product model.Product = productCliente.GetProductByName(key)
-	var productDto dto.ProductDto
+	var product []model.Product = productCliente.GetProductByName(key)
+	var productDto []dto.ProductDto
 
-	//	var productAuxDto dto.ProductDto
+	var productAuxDto dto.ProductDto
 
-	if strings.Contains(productDto.Name_product, key) {
-
-	}
 	/*
 
 	    PENSAR QUE PASA SI NO ME MANDAN CUALQUIER COSA,
@@ -50,13 +46,16 @@ func (s *productService) GetProductByName(key string) (dto.ProductDto, e.ApiErro
 	   		return userDto, e.NewBadRequestApiError("user not found")
 	   	}
 	*/
+	for i := 0; i < len(product); i++ { // guardar datos en productDto[] para devolver al cliente
 
-	productDto.Name_product = product.Name_product
-	productDto.Price = product.Price
-	productDto.Stock = product.Stock
-	productDto.Id_Product = product.Id_Product
-	productDto.Category = product.Category
-
+		productAuxDto.Id_Product = product[i].Id_Product
+		productAuxDto.Category = product[i].Category
+		productAuxDto.Descripcion = product[i].Descripcion
+		productAuxDto.Name_product = product[i].Name_product
+		productAuxDto.Price = product[i].Price
+		productAuxDto.Stock = product[i].Stock
+		productDto = append(productDto, productAuxDto)
+	}
 	return productDto, nil
 
 }

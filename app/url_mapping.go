@@ -15,7 +15,7 @@ func mapUrls() {
 
 	router.POST("/login", userController.LoginUser) //identificar el usuario ^ devolver una toquen
 
-	router.POST("/product/product/:KeyPro", productController.GetProductByName) // Busca productos por Palabra clave
+	router.GET("/product/product/:KeyPro", productController.GetProductByName) // Busca productos por Palabra clave
 
 	router.POST("/compra/add", orderController.NewOrder) //Debe crear la nueva orden verificar cantidades
 

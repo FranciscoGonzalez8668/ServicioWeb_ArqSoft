@@ -11,6 +11,17 @@ import (
 
 var Db *gorm.DB
 
+func GetDetalles(id_order int) []model.Detalle {
+	var detalles []model.Detalle
+	Db.Where("id_order ? ", id_order).Find(&detalles)
+	return detalles
+
+}
+func GetOrders(id_user int) []model.Order {
+	var orders []model.Order
+	Db.Where("Id_User = ?", id_user).Find(&orders)
+	return orders
+}
 func GetHistory(id_user int) ([]model.OrderDet, []int) {
 	var orderHistory []model.OrderDet
 
@@ -48,20 +59,24 @@ func GetHistory(id_user int) ([]model.OrderDet, []int) {
 
 }
 
-func NewOrder(order model.Order, detalles []model.DetalleDet) model.Order {
-	result := Db.Create(&order)
+func NewOrder(order model.Order, detalles []model.Detalle) model.Order {
+	var product model.Product
 
+	for j := 0; j < len(detalles); j++ {
+		Db.Where("id_product ?", detalles[j].Id_Product).First(&product)
+		if product.Stock < detalles[j].Cantidad {
+			return order
+		}
+	}
+	result := Db.Create(&order)
 	if result.Error != nil {
 		log.Error("no se pudo crear la orden")
 	}
 	for i := 0; i < len(detalles); i++ {
-		detalles[i].Id_Order = order.Id_order
+		detalles[i].Id_Order = order.Id_Order
 	}
-	result = Db.Create(&detalles)
-	if result.Error != nil {
-		log.Error("no se pudo crear los detalles")
-	}
+	Db.Create(&detalles)
 
-	log.Debug("order created: ", order.Id_order)
+	log.Debug("order created: ", order.Id_Order)
 	return order
 }
