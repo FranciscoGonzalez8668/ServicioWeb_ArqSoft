@@ -11,14 +11,17 @@ import (
 var Db *gorm.DB
 
 //FUNCION LISTA
+//Params: array product.product
+//Proces: Busca en la base de datos todos los productos que contiene ese nombre
+// o parte de el y los devuelve.
 
-func GetProductByName(key string) model.Product {
-	var product model.Product
+func GetProductByName(key string) []model.Product {
+	var products []model.Product
 
-	Db.Where("key LIKE ? ", "%"+key+"%").First(&product)
-	log.Debug("Product: ", product)
+	Db.Where("Product LIKE ?", key+"%").Find(&products)
+	log.Debug("Product: ", products)
 
-	return product
+	return products
 }
 
 //FUNCION LISTA
