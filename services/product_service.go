@@ -9,6 +9,7 @@ import (
 	productCliente "pan/clients/product"
 	"pan/dto"
 	"pan/model"
+	"strings"
 
 	//	"mvc-go/dto"
 	//	"mvc-go/model"
@@ -29,22 +30,27 @@ var (
 
 func init() {
 	ProductService = &productService{}
+
 }
 
-func (s *productService) GetProductByName(key string) (dto.ProductDto, e.ApiError) { //epi no importado pero en el mvc no esta
+func (s *productService) GetProductByName(key string) (dto.ProductDto, e.ApiError) {
 
 	var product model.Product = productCliente.GetProductByName(key)
 	var productDto dto.ProductDto
 
+	//	var productAuxDto dto.ProductDto
+
+	if strings.Contains(productDto.Name_product, key) {
+
+	}
 	/*
 
 	    PENSAR QUE PASA SI NO ME MANDAN CUALQUIER COSA,
 	   	if user.Id == 0 {
 	   		return userDto, e.NewBadRequestApiError("user not found")
 	   	}
-
-
 	*/
+
 	productDto.Name_product = product.Name_product
 	productDto.Price = product.Price
 	productDto.Stock = product.Stock
