@@ -7,8 +7,8 @@ type Detalle struct {
 }
 
 type DetalleDet struct {
-	Id_detalle    int
 	Cantidad      int
 	Precio_Moment float32
-	Product_Name  string
+	Id_Product    int
+	Id_Order      int
 }

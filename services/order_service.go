@@ -49,15 +49,18 @@ func (s *orderService) OrderHistoy(idUser int) ([]dto.OrderDetDto, e.ApiError) {
 	}
 	return ordersDto, nil
 }
-func (s *orderService) NewOrder(detalles []dto.DetalleDto) (dto.OrderDto, e.ApiError) {
+func (s *orderService) NewOrder(detallesDto []dto.DetalleDto) (dto.OrderDto, e.ApiError) {
 	var order model.Order
+	var detalles []model.DetalleDet
 	var total float32 = 0
 	for j := 0; j < len(detalles); j++ {
-		total = total + detalles[j].Price_det
+		detalles[j].Cantidad = detallesDto[j].Cant_det
+		detalles[j].Id_Product = detallesDto[j].Detalle_id_product
+		detalles[j].Precio_Moment = detallesDto[j].Price_det
+		total = total + detallesDto[j].Price_det
 	}
 	order.Total = total
-
-	order = orderCliente.NewOrder(order)
+	order = orderCliente.NewOrder(order, detalles)
 	//hay una diferencia entre los dto y los modelos ya que los dto tienen datos de otras tablas de la db
 	var orderDto dto.OrderDto
 	orderDto.Id_order = order.Id_order

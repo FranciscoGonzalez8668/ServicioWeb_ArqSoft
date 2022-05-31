@@ -48,12 +48,20 @@ func GetHistory(id_user int) ([]model.OrderDet, []int) {
 
 }
 
-func NewOrder(order model.Order) model.Order {
+func NewOrder(order model.Order, detalles []model.DetalleDet) model.Order {
 	result := Db.Create(&order)
 
 	if result.Error != nil {
-		log.Error("no se pudo crear en la base de datos")
+		log.Error("no se pudo crear la orden")
 	}
+	for i := 0; i < len(detalles); i++ {
+		detalles[i].Id_Order = order.Id_order
+	}
+	result = Db.Create(&detalles)
+	if result.Error != nil {
+		log.Error("no se pudo crear los detalles")
+	}
+
 	log.Debug("order created: ", order.Id_order)
 	return order
 }

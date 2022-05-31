@@ -122,7 +122,7 @@ PANTALLAS
 	Boton aumento cantidad 
 	Boton borrar todo
 
-	manda json Lista_id_product_Comprados ^ token  ^ precio_momento
+	manda json array detalles con cantidad precio_momento id_product
 	espera json OK 
 
 	React 
