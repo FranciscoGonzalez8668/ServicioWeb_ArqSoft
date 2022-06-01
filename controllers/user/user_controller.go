@@ -15,6 +15,7 @@ import (
 var jwtKey = []byte("secret_key")
 
 func OK(c *gin.Context) {
+	log.Debug("AHHHHHHHHHHHHHHHHHHHHHH")
 	c.JSON(http.StatusOK, "OK")
 }
 

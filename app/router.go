@@ -18,7 +18,7 @@ func StartRoute() {
 
 	log.Info("Starting server")
 
-	router := gin.Default()
-	router.SetTrustedProxies(nil)
+	/*router := gin.Default()
+	router.SetTrustedProxies(nil)*/
 	router.Run(":3306")
 }
