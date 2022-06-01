@@ -1,7 +1,6 @@
 package userController
 
 import (
-	//"fmt"
 	"net/http"
 	"pan/dto"
 
