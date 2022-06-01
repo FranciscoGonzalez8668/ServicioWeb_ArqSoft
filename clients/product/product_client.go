@@ -48,7 +48,7 @@ func GetProductByCat(cat string) []model.Product { //
 		fmt.Println("se entra ford client i= ", j)
 		productAux.Id_Product = j
 		productAux.Category = "electronico"
-		productAux.Descripcion = "computadora lenovo"
+		productAux.Desciption = "computadora lenovo"
 		productAux.Name_product = "Lenovo Computador"
 		productAux.Price = 3.25
 		productAux.Stock = 1

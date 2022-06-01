@@ -4,9 +4,9 @@ type Product struct {
 	Id_Product   int     `gorm:"primaryKey"`
 	Name_product string  `gorm:"type:varchar(350);not null;unique"`
 	Price        float64 `gorm:"type:float;not null"`
-	Stock        int     `gorm:"type:int"`
+	Stock        int     `gorm:"type:int;not null"`
 	Category     string  `gorm:"type:varchar(350);not null"`
-	Descripcion  string  `gotm:"type:carchar(8000): not null)"`
+	Desciption   string  `gorm:"type:carchar(3000): not null"`
 
 	/*Name string `json:"name"`
 	UniversalCode string `json:"universal_code"`

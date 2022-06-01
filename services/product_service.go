@@ -50,7 +50,7 @@ func (s *productService) GetProductByName(key string) (dto.ProductsDto, e.ApiErr
 
 		productAuxDto.Id_Product = product[i].Id_Product
 		productAuxDto.Category = product[i].Category
-		productAuxDto.Descripcion = product[i].Descripcion
+		productAuxDto.Descripcion = product[i].Desciption
 		productAuxDto.Name_product = product[i].Name_product
 		productAuxDto.Price = product[i].Price
 		productAuxDto.Stock = product[i].Stock
@@ -73,7 +73,7 @@ func (s *productService) GetProductByCat(cat string) (dto.ProductsDto, e.ApiErro
 
 		productAuxDto.Id_Product = product[i].Id_Product
 		productAuxDto.Category = product[i].Category
-		productAuxDto.Descripcion = product[i].Descripcion
+		productAuxDto.Descripcion = product[i].Desciption
 		productAuxDto.Name_product = product[i].Name_product
 		productAuxDto.Price = product[i].Price
 		productAuxDto.Stock = product[i].Stock

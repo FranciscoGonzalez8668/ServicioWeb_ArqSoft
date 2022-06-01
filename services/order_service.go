@@ -39,7 +39,7 @@ func (s *orderService) OrderHistoy(idUser int) (dto.OrdersHistoryDto, e.ApiError
 			order.Order[j].Det_order[k].Product.Category = product.Category
 			order.Order[j].Det_order[k].Product.Price = product.Price
 			order.Order[j].Det_order[k].Product.Stock = product.Stock
-			order.Order[j].Det_order[k].Product.Descripcion = product.Descripcion
+			order.Order[j].Det_order[k].Product.Descripcion = product.Desciption
 
 			order.Order[j].Det_order[k].Cant_det = detalles[k].Cantidad
 			order.Order[j].Det_order[k].Price_det = detalles[k].Precio_Moment
