@@ -1,7 +1,7 @@
 package product
 
 import (
-	"fmt"
+	//"fmt"
 
 	"pan/model"
 
@@ -22,42 +22,43 @@ func GetOrders(id_user int) []model.Order {
 	Db.Where("Id_User = ?", id_user).Find(&orders)
 	return orders
 }
-func GetHistory(id_user int) ([]model.OrderDet, []int) {
-	var orderHistory []model.OrderDet
 
-	var orderAux model.OrderDet
-	for j := 0; j < 4; j++ {
-		fmt.Println("se entra ford client i= ", j)
-		orderAux.Id_Orden = j
-		orderAux.Total = 5
-		orderAux.Cantidad = j * 2
-		orderAux.Precio_Moment = 100
-		orderAux.Product = "Led"
-		/*for i := 0; i < 2; i++ {
-			orderAux.Detalles[i].Cantidad = 2
-			orderAux.Detalles[i].Id_detalle = i
-			orderAux.Detalles[i].Product_Name = "jabon"
-			orderAux.Detalles[i].Precio_Moment = 2
-		}*/
-		orderHistory = append(orderHistory, orderAux)
-	}
+/*func GetHistory(id_user int) ([]model.OrderDet, []int) {
+var orderHistory []model.OrderDet
 
-	//var detalles []model.Detalle
+var orderAux model.OrderDet
+for j := 0; j < 4; j++ {
+	fmt.Println("se entra ford client i= ", j)
+	orderAux.Id_Orden = j
+	orderAux.Total = 5
+	orderAux.Cantidad = j * 2
+	orderAux.Precio_Moment = 100
+	orderAux.Product = "Led"
+	/*for i := 0; i < 2; i++ {
+		orderAux.Detalles[i].Cantidad = 2
+		orderAux.Detalles[i].Id_detalle = i
+		orderAux.Detalles[i].Product_Name = "jabon"
+		orderAux.Detalles[i].Precio_Moment = 2
+	}*/
+/*orderHistory = append(orderHistory, orderAux)
+}*/
 
-	//SQL necesario
-	//SELECT s.staff_id, p.amount, p.payment_id ,p.last_update
-	//FROM staff s INNER JOIN payment p on p.staff_id = s.staff_id;
-	/*
-		Db.Model(&model.Order{}).Select("order.Id_Order,detalle.Cantidad, detalle.Precio_Moment, product.Name_product").
-		Joins("left join detalle on detalle.Id_Order = order.Id_Order").
-		Joins("left join product on product.Id_Product = detalle.Id_Product").Find(&orderHistory)
-	*/
+//var detalles []model.Detalle
 
-	var id_order []int
+//SQL necesario
+//SELECT s.staff_id, p.amount, p.payment_id ,p.last_update
+//FROM staff s INNER JOIN payment p on p.staff_id = s.staff_id;
+/*
+	Db.Model(&model.Order{}).Select("order.Id_Order,detalle.Cantidad, detalle.Precio_Moment, product.Name_product").
+	Joins("left join detalle on detalle.Id_Order = order.Id_Order").
+	Joins("left join product on product.Id_Product = detalle.Id_Product").Find(&orderHistory)
+*/
+
+/*var id_order []int
 	Db.Model(&model.Order{}).Select("order.Id_Order").Joins("left join user on user.Id_Order = order.Id_order").Group("order.Id_Order").Find(&id_order)
 	return orderHistory, id_order
 
-}
+}*/
 
 func NewOrder(order model.Order, detalles []model.Detalle) model.Order {
 	var product model.Product
@@ -73,7 +74,7 @@ func NewOrder(order model.Order, detalles []model.Detalle) model.Order {
 		log.Error("no se pudo crear la orden")
 	}
 	for i := 0; i < len(detalles); i++ {
-		detalles[i].Id_Order = order.Id_Orden
+		detalles[i].Id_Orden = order.Id_Orden
 	}
 	Db.Create(&detalles)
 
