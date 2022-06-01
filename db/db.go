@@ -1,17 +1,11 @@
 package db
 
 import (
-
-	///IMPORTS COPIADOS DEL TEORICO
-	/*
-		"mvc-go/model"
-
-
-		_ "github.com/jinzhu/gorm/dialects/mysql"
-		log "github.com/sirupsen/logrus"
-	*/
-	//userClient "mvc-go/clients/user"
 	"fmt"
+	orderClient "pan/clients/order"
+	productClient "pan/clients/product"
+	userClient "pan/clients/user"
+	"pan/model"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
@@ -25,12 +19,12 @@ var (
 
 func init() {
 
-	DBName := "PAN"
+	DBName := "pan"
 	DBUser := "root"
-	DBPass := "rootroot"
+	DBPass := "root"
 	DBHost := "127.0.0.1"
 
-	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3306)/"+DBName+"?charset=utf8&parseTime=True")
+	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3307)/"+DBName+"?charset=utf8&parseTime=True")
 
 	if err != nil {
 		fmt.Println(err)
@@ -40,16 +34,19 @@ func init() {
 		log.Info("Connection Established")
 	}
 
-	//userClient.Db =db
+	userClient.Db = db
+	productClient.Db = db
+	orderClient.Db = db
 
 }
 
 func StartDbEngine() {
 
-	//CREAR LAS TABLAS DEL DB
-	/*db.AutoMigrate(&model.User{})
-	db.AutoMigrate(&model.Produc{})
-	db.AutoMigrate(&model.Order{})*/
+	db.AutoMigrate(&model.User{})
+	db.AutoMigrate(&model.Product{})
+	db.AutoMigrate(&model.Order{})
+	db.AutoMigrate(&model.Detalle{})
+	db.AutoMigrate(&model.Adress{})
 
 	log.Info("Finishing Migration Database Tables")
 }

@@ -28,7 +28,7 @@ func GetHistory(id_user int) ([]model.OrderDet, []int) {
 	var orderAux model.OrderDet
 	for j := 0; j < 4; j++ {
 		fmt.Println("se entra ford client i= ", j)
-		orderAux.Id_order = j
+		orderAux.Id_Orden = j
 		orderAux.Total = 5
 		orderAux.Cantidad = j * 2
 		orderAux.Precio_Moment = 100
@@ -73,10 +73,10 @@ func NewOrder(order model.Order, detalles []model.Detalle) model.Order {
 		log.Error("no se pudo crear la orden")
 	}
 	for i := 0; i < len(detalles); i++ {
-		detalles[i].Id_Order = order.Id_Order
+		detalles[i].Id_Order = order.Id_Orden
 	}
 	Db.Create(&detalles)
 
-	log.Debug("order created: ", order.Id_Order)
+	log.Debug("order created: ", order.Id_Orden)
 	return order
 }

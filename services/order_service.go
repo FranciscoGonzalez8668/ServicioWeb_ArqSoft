@@ -5,7 +5,6 @@ import (
 	productClient "pan/clients/product"
 	"pan/dto"
 	"pan/model"
-
 	e "pan/utils/errors"
 )
 
@@ -31,7 +30,7 @@ func (s *orderService) OrderHistoy(idUser int) (dto.OrdersHistoryDto, e.ApiError
 	var order dto.OrdersHistoryDto
 	orders = orderCliente.GetOrders(idUser)
 	for j := 0; j < len(orders); j++ {
-		detalles = orderCliente.GetDetalles(orders[j].Id_Order)
+		detalles = orderCliente.GetDetalles(orders[j].Id_Orden)
 		for k := 0; k < len(detalles); k++ {
 			product = productClient.GetProductById(detalles[k].Id_Product)
 			order.Order[j].Det_order[k].Product.Id_Product = product.Id_Product
@@ -64,12 +63,12 @@ func (s *orderService) NewOrder(detallesDto []dto.DetalleDto) (dto.OrderDto, e.A
 	order.Total = total
 	order = orderCliente.NewOrder(order, detalles)
 	var orderDto dto.OrderDto
-	if order.Id_Order == 0 {
+	if order.Id_Orden == 0 {
 		return orderDto, e.NewBadRequestApiError("No stock enought")
 	}
 	//hay una diferencia entre los dto y los modelos ya que los dto tienen datos de otras tablas de la db
 
-	orderDto.Id_order = order.Id_Order
+	orderDto.Id_order = order.Id_Orden
 	orderDto.Total = order.Total
 
 	return orderDto, nil
