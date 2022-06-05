@@ -25,6 +25,8 @@ func init() {
 	DBHost := "127.0.0.1"
 
 	db, err = gorm.Open("mysql", DBUser+":"+DBPass+"@tcp("+DBHost+":3307)/"+DBName+"?charset=utf8&parseTime=True")
+	/*dsn:="root:root@tcp(127.0.0.1:3307)/pan?charset=utf8mb4&parseTime=True&loc=Local"
+	db, err :=gorm.Open(mysql.Open(DBUser+":"+DBPass+"@tcp("+DBHost+":3307)/"+DBName+"?charset=utf8&parseTime=True"))*/
 
 	if err != nil {
 		fmt.Println(err)
@@ -37,6 +39,10 @@ func init() {
 	userClient.Db = db
 	productClient.Db = db
 	orderClient.Db = db
+
+}
+
+func main() {
 
 }
 

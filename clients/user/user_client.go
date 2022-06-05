@@ -5,7 +5,6 @@ import (
 	"pan/model"
 
 	"github.com/jinzhu/gorm"
-	log "github.com/sirupsen/logrus"
 )
 
 var Db *gorm.DB
@@ -30,8 +29,7 @@ func GetUserByEmail(LoginDto dto.LoginDto) model.User {
 	user.Lname = "Gonzalez"
 	user.Name = "Francisco"
 	user.Password = "abc"*/
-	log.Debug("email ?     password ?", LoginDto.Email, LoginDto.Password)
-	Db.Where("email= ? AND password= ?", LoginDto.Email, LoginDto.Password).First(&user) //No se creo la base de datos todavia
-	log.Debug("Email: ", user)
+	Db.First(&user, "email = ? AND password = ?", LoginDto.Email, LoginDto.Password)
+	//Db.Where("email= ? AND password= ?", LoginDto.Email, LoginDto.Password).First(&user) //No se creo la base de datos todavia
 	return user
 }

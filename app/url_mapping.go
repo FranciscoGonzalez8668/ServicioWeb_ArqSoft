@@ -20,9 +20,9 @@ func mapUrls() {
 
 	router.PUT("/cart") //CartController.CartMananger) //Sumar Restar sacar y agregar productos en carrito
 
-	router.GET("/User/OrH", orderController.GetHistory) //Devolver compras por user
+	router.GET("/User/OrH/:IU", orderController.GetHistory) //Devolver compras por user
 
-	router.POST("/product/cat/:KeyCat", productController.GetProductByCat) //product.Controller.GetProductByCat)//Traer Productos por Categoria
+	router.GET("/product/cat/:KeyCat", productController.GetProductByCat) //product.Controller.GetProductByCat)//Traer Productos por Categoria
 
 	log.Info("Finishing mappings configurations")
 

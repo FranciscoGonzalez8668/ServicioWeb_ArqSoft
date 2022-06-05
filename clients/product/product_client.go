@@ -1,7 +1,6 @@
 package product
 
 import (
-	"fmt"
 	"pan/model"
 
 	"github.com/jinzhu/gorm"
@@ -17,9 +16,8 @@ var Db *gorm.DB
 
 func GetProductByName(key string) []model.Product {
 	var products []model.Product
-
-	Db.Where("Product LIKE ?", key+"%").Find(&products)
-	log.Debug("Product: ", products)
+	Db.Where("name_product LIKE ?", key+"%").Find(&products)
+	log.Debug("products: ", products)
 
 	return products
 }
@@ -27,7 +25,7 @@ func GetProductByName(key string) []model.Product {
 func GetProductById(id_product int) model.Product {
 	var product model.Product
 
-	Db.Where("id_product = ?").First(&product)
+	Db.Where("id_product = ?", id_product).First(&product)
 	log.Debug("Product: ", product)
 
 	return product
@@ -43,7 +41,14 @@ func GetProductById(id_product int) model.Product {
 func GetProductByCat(cat string) []model.Product { //
 
 	var products []model.Product
-	var productAux model.Product
+
+	Db.Where("category LIKE ?", cat+"%").Find(&products)
+
+	log.Debug("products: ", products)
+
+	return products
+
+	/*var productAux model.Product
 	for j := 0; j < 2; j++ {
 		fmt.Println("se entra ford client i= ", j)
 		productAux.Id_Product = j
@@ -54,12 +59,6 @@ func GetProductByCat(cat string) []model.Product { //
 		productAux.Stock = 1
 		products = append(products, productAux)
 	}
-	fmt.Println("array created")
-
-	/*Db.Where("Category LIKE ?", cat+"%").Find(&products)
-
-	log.Debug("Products", products)
-	*/
-	return products
+	fmt.Println("array created")*/
 
 }

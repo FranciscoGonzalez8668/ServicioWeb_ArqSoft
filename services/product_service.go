@@ -1,17 +1,9 @@
 package services
 
 import (
-
-	//HAY QUE CAMBIAR ESTOS PATH
-
-	//"log"
-	"fmt"
 	productCliente "pan/clients/product"
 	"pan/dto"
 	"pan/model"
-
-	//	"mvc-go/dto"
-	//	"mvc-go/model"
 	e "pan/utils/errors"
 )
 
@@ -39,13 +31,10 @@ func (s *productService) GetProductByName(key string) (dto.ProductsDto, e.ApiErr
 
 	var productAuxDto dto.ProductDto
 
-	/*
+	if product[0].Id_Product == 0 { // si no se encuentran productos NOT FOUND
+		return productDto, e.NewBadRequestApiError("Product Not Found")
+	}
 
-	    PENSAR QUE PASA SI NO ME MANDAN CUALQUIER COSA,
-	   	if user.Id == 0 {
-	   		return userDto, e.NewBadRequestApiError("user not found")
-	   	}
-	*/
 	for i := 0; i < len(product); i++ { // guardar datos en productDto[] para devolver al cliente
 
 		productAuxDto.Id_Product = product[i].Id_Product
@@ -62,12 +51,14 @@ func (s *productService) GetProductByName(key string) (dto.ProductsDto, e.ApiErr
 
 func (s *productService) GetProductByCat(cat string) (dto.ProductsDto, e.ApiError) {
 
-	var product []model.Product = productCliente.GetProductByCat(cat) //LA FUNCION DE PRODUCT CLIENTE NO ESTA BIEN HECHA SE DEBE ESPERAR UN ARRYA DE PRODUCTOS
+	var product []model.Product = productCliente.GetProductByCat(cat)
 	var productDto []dto.ProductDto
 
 	var productAuxDto dto.ProductDto
 
-	fmt.Println("client copio bien")
+	if product[0].Id_Product == 0 { // si no se encuentran productos NOT FOUND
+		return productDto, e.NewBadRequestApiError("Product Not Found")
+	}
 
 	for i := 0; i < len(product); i++ { // guardar datos en productDto[] para devolver al cliente
 

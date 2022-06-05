@@ -1,7 +1,7 @@
 package model
 
 type Detalle struct {
-	Id_Orden      int     `gorm:"primaryKey"`
+	Id_Order      int     `gorm:"primaryKey"`
 	Id_Detalle    int     `gorm:"primaryKey"`
 	Id_Product    int     `gorm:"type:int"`
 	Cantidad      int     `gorm:"type:int;not null"`

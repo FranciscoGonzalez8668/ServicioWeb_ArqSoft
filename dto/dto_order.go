@@ -6,6 +6,10 @@ type OrderDto struct {
 	Det_order []DetalleDto `json:"det_orden"`
 	Adress    AdressDto    `json:"adress"`
 }
+type NewOrderDto struct {
+	Id_User  int          `json:"id_user"`
+	Detalles []DetalleDto `json:"detalles"`
+}
 
 type OrdersHistoryDto struct {
 	Id_User int        `json:"id_user"`
