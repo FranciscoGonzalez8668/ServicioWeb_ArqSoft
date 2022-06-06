@@ -49,7 +49,7 @@ func LoginUser(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, "Invalid Token")
 		return
 	}
-	c.JSON(http.StatusCreated, "Login Succesful")
+	c.JSON(http.StatusCreated, tokenDto)
 	//falta seguir con cosas del servis que aun no estan implementadas
 
 }
