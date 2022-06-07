@@ -12,9 +12,10 @@ func mapUrls() {
 
 	router.GET("/OK", userController.OK)
 
-	router.OPTIONS("/login", userController.LoginUser) //identificar el usuario ^ devolver una toquen
+	router.POST("/login", userController.LoginUser) //identificar el usuario ^ devolver una toquen
 
 	router.GET("/product/product/:KeyPro", productController.GetProductByName) // Busca productos por Palabra clave
+	router.GET("/product/all", productController.GetProductAll)
 
 	router.OPTIONS("/compra/add", orderController.NewOrder) //Debe crear la nueva orden verificar cantidades
 

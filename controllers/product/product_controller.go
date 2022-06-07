@@ -40,3 +40,13 @@ func GetProductByCat(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, productsDto)
 }
+
+func GetProductAll(c *gin.Context) {
+	productsDto, err := service.ProductService.GetProductAll()
+
+	if err != nil {
+		c.JSON(err.Status(), err)
+		return
+	}
+	c.JSON(http.StatusOK, productsDto)
+}

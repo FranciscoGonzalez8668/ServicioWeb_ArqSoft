@@ -62,3 +62,13 @@ func GetProductByCat(cat string) []model.Product { //
 	fmt.Println("array created")*/
 
 }
+
+func GetProductAll() []model.Product {
+	var products []model.Product
+
+	Db.Find(&products)
+
+	log.Debug("products: ", products)
+
+	return products
+}

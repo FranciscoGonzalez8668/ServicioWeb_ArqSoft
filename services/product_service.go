@@ -13,6 +13,7 @@ type productService struct{}
 type productServiceInterface interface {
 	GetProductByName(Key string) (dto.ProductsDto, e.ApiError)
 	GetProductByCat(key string) (dto.ProductsDto, e.ApiError)
+	GetProductAll() (dto.ProductsDto, e.ApiError)
 }
 
 var (
@@ -73,4 +74,25 @@ func (s *productService) GetProductByCat(cat string) (dto.ProductsDto, e.ApiErro
 
 	return productDto, nil
 
+}
+func (s *productService) GetProductAll() (dto.ProductsDto, e.ApiError) {
+	var productsModel []model.Product = productCliente.GetProductAll()
+	var productsDto dto.ProductsDto
+
+	var productsAux dto.ProductDto
+
+	if productsModel[0].Id_Product == 0 {
+		return productsDto, e.NewBadRequestApiError("No products in DataBase")
+	}
+
+	for k := 0; k < len(productsModel); k++ {
+		productsAux.Id_Product = productsModel[k].Id_Product
+		productsAux.Category = productsModel[k].Category
+		productsAux.Descripcion = productsModel[k].Desciption
+		productsAux.Name_product = productsModel[k].Name_product
+		productsAux.Price = productsModel[k].Price
+		productsAux.Stock = productsModel[k].Stock
+		productsDto = append(productsDto, productsAux)
+	}
+	return productsDto, nil
 }
