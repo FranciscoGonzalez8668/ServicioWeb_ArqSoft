@@ -40,7 +40,7 @@ func (s *productService) GetProductByName(key string) (dto.ProductsDto, e.ApiErr
 
 		productAuxDto.Id_Product = product[i].Id_Product
 		productAuxDto.Category = product[i].Category
-		productAuxDto.Descripcion = product[i].Desciption
+		productAuxDto.Descripcion = product[i].Description
 		productAuxDto.Name_product = product[i].Name_product
 		productAuxDto.Price = product[i].Price
 		productAuxDto.Stock = product[i].Stock
@@ -65,7 +65,7 @@ func (s *productService) GetProductByCat(cat string) (dto.ProductsDto, e.ApiErro
 
 		productAuxDto.Id_Product = product[i].Id_Product
 		productAuxDto.Category = product[i].Category
-		productAuxDto.Descripcion = product[i].Desciption
+		productAuxDto.Descripcion = product[i].Description
 		productAuxDto.Name_product = product[i].Name_product
 		productAuxDto.Price = product[i].Price
 		productAuxDto.Stock = product[i].Stock
@@ -88,7 +88,7 @@ func (s *productService) GetProductAll() (dto.ProductsDto, e.ApiError) {
 	for k := 0; k < len(productsModel); k++ {
 		productsAux.Id_Product = productsModel[k].Id_Product
 		productsAux.Category = productsModel[k].Category
-		productsAux.Descripcion = productsModel[k].Desciption
+		productsAux.Descripcion = productsModel[k].Description
 		productsAux.Name_product = productsModel[k].Name_product
 		productsAux.Price = productsModel[k].Price
 		productsAux.Stock = productsModel[k].Stock

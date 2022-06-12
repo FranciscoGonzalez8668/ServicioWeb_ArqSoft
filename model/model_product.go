@@ -6,7 +6,7 @@ type Product struct {
 	Price        float64 `gorm:"type:float;not null"`
 	Stock        int     `gorm:"type:int;not null"`
 	Category     string  `gorm:"type:varchar(350);not null"`
-	Desciption   string  `gorm:"type:varchar(3000); not null"`
+	Description  string  `gorm:"type:varchar(3000); not null"`
 
 	/*Name string `json:"name"`
 	UniversalCode string `json:"universal_code"`
