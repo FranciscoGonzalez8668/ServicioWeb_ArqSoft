@@ -13,7 +13,7 @@ import (
 type orderService struct{}
 
 type orderServiceInterface interface {
-	OrderHistoy(int) (dto.OrdersHistoryDto, e.ApiError)
+	OrderHistory(int) (dto.OrdersHistoryDto, e.ApiError)
 	NewOrder(NewOrderDto dto.NewOrderDto) (dto.OrderDto, e.ApiError)
 }
 
@@ -25,7 +25,7 @@ func init() {
 	OrderService = &orderService{}
 }
 
-func (s *orderService) OrderHistoy(idUser int) (dto.OrdersHistoryDto, e.ApiError) {
+func (s *orderService) OrderHistory(idUser int) (dto.OrdersHistoryDto, e.ApiError) {
 	var orders []model.Order
 	var detalles []model.Detalle
 
@@ -35,6 +35,7 @@ func (s *orderService) OrderHistoy(idUser int) (dto.OrdersHistoryDto, e.ApiError
 	var product model.Product
 	var order dto.OrdersHistoryDto
 	orders = orderCliente.GetOrders(idUser)
+	log.Debug("Ordenes: ", orders)
 
 	// seteo de []order.orderhistorydto lugar por lugar
 	for j := 0; j < len(orders); j++ {

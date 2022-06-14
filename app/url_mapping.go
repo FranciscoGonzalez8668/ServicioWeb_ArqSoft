@@ -17,7 +17,7 @@ func mapUrls() {
 	router.GET("/product/product/:KeyPro", productController.GetProductByName) // Busca productos por Palabra clave
 	router.GET("/product/all", productController.GetProductAll)
 
-	router.OPTIONS("/compra/add", orderController.NewOrder) //Debe crear la nueva orden verificar cantidades
+	router.PUT("/compra/add", orderController.NewOrder) //Debe crear la nueva orden verificar cantidades
 
 	router.PUT("/cart") //CartController.CartMananger) //Sumar Restar sacar y agregar productos en carrito
 

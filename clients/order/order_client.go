@@ -19,7 +19,7 @@ func GetDetalles(id_order int) []model.Detalle {
 }
 func GetOrders(id_user int) []model.Order {
 	var orders []model.Order
-	Db.First(&orders)
+	Db.Find(&orders)
 	return orders
 }
 
@@ -36,14 +36,13 @@ func NewOrder(order model.Order, detalles []model.Detalle) model.Order {
 			return order
 		}
 	}
-	Db.Last(&LastOrdenDb)
+	Db.Order("id_order DESC").First(&LastOrdenDb)
 	order.Id_Order = 1 + LastOrdenDb.Id_Order
 	//se seta el id_order en los detalles
-	log.Debug("ORDEN", order)
 	for i := 0; i < len(detalles); i++ {
 		Db.Last(&LastDetalleDb)
 		detalles[i].Id_Order = order.Id_Order
-		detalles[i].Id_Detalle = 1 + i + LastDetalleDb.Id_Detalle
+		detalles[i].Id_Detalle = 2 + i + LastDetalleDb.Id_Detalle
 	}
 	result := Db.Create(&order)
 	if result.Error != nil {
@@ -52,15 +51,12 @@ func NewOrder(order model.Order, detalles []model.Detalle) model.Order {
 	log.Debug(detalles)
 	for k := 0; k < len(detalles); k++ {
 		result = Db.Create(&detalles[k])
-		log.Debug("creados")
 		if result.Error != nil {
-			log.Error("no se pudieron crear los detalles")
 			Db.Where("id_order = ?", order.Id_Order).Delete(&order)
 			return order
 		}
 	}
 
-	log.Debug("detalles creados")
 	for k := 0; k < len(detalles); k++ {
 		Db.Model(&model.Product{}).Where("id_product = ?", detalles[k].Id_Product).Update("stock", gorm.Expr("stock - ?", detalles[k].Cantidad))
 	}

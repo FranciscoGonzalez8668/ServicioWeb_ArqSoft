@@ -44,7 +44,7 @@ func GetProductByCat(cat string) []model.Product { //
 
 	Db.Where("category LIKE ?", cat+"%").Find(&products)
 
-	log.Debug("products: ", products)
+	log.Debug("product: ", products)
 
 	return products
 

@@ -5,6 +5,8 @@ import (
 	"pan/dto"
 	"pan/model"
 	e "pan/utils/errors"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type productService struct{}
@@ -32,7 +34,10 @@ func (s *productService) GetProductByName(key string) (dto.ProductsDto, e.ApiErr
 
 	var productAuxDto dto.ProductDto
 
-	if product[0].Id_Product == 0 { // si no se encuentran productos NOT FOUND
+	if product == nil { // si no se encuentran productos NOT FOUND
+		productAuxDto.Id_Product = 0
+		productDto = append(productDto, productAuxDto)
+		log.Debug("f", productDto)
 		return productDto, e.NewBadRequestApiError("Product Not Found")
 	}
 
@@ -56,9 +61,12 @@ func (s *productService) GetProductByCat(cat string) (dto.ProductsDto, e.ApiErro
 	var productDto []dto.ProductDto
 
 	var productAuxDto dto.ProductDto
+	if product == nil { // si no se encuentran productos NOT FOUND
+		productAuxDto.Id_Product = 0
+		productDto = append(productDto, productAuxDto)
+		log.Debug("f", productDto)
 
-	if product[0].Id_Product == 0 { // si no se encuentran productos NOT FOUND
-		return productDto, e.NewBadRequestApiError("Product Not Found")
+		return productDto, e.NewBadRequestApiError("Product null")
 	}
 
 	for i := 0; i < len(product); i++ { // guardar datos en productDto[] para devolver al cliente
@@ -82,6 +90,7 @@ func (s *productService) GetProductAll() (dto.ProductsDto, e.ApiError) {
 	var productsAux dto.ProductDto
 
 	if productsModel[0].Id_Product == 0 {
+		productsDto[0].Id_Product = 0
 		return productsDto, e.NewBadRequestApiError("No products in DataBase")
 	}
 
