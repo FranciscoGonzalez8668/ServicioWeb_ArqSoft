@@ -49,6 +49,7 @@ func LoginUser(c *gin.Context) {
 		c.JSON(http.StatusUnauthorized, "Invalid Token")
 		return
 	}
+	log.Debug(tokenDto)
 	c.JSON(http.StatusCreated, tokenDto)
 	//falta seguir con cosas del servis que aun no estan implementadas
 
