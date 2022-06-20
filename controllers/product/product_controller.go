@@ -52,3 +52,18 @@ func GetProductAll(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, productsDto)
 }
+
+func GetProductCart(c *gin.Context) {
+	var productsCart dto.IdProCart
+	var products []dto.ProductCart
+	err := c.BindJSON(&productsCart)
+	log.Debug("productos", productsCart)
+	if err != nil {
+		log.Debug(err)
+		c.JSON(http.StatusBadRequest, products)
+		return
+	}
+	products, err = service.ProductService.GetProductsCart(productsCart)
+	if err != nil {
+	}
+}

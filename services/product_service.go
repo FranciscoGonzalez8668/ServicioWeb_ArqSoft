@@ -5,6 +5,7 @@ import (
 	"pan/dto"
 	"pan/model"
 	e "pan/utils/errors"
+	"strconv"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -16,6 +17,7 @@ type productServiceInterface interface {
 	GetProductByName(Key string) (dto.ProductsDto, e.ApiError)
 	GetProductByCat(key string) (dto.ProductsDto, e.ApiError)
 	GetProductAll() (dto.ProductsDto, e.ApiError)
+	GetProductsCart(dto.IdProCart) ([]dto.ProductCart, e.ApiError)
 }
 
 var (
@@ -103,5 +105,30 @@ func (s *productService) GetProductAll() (dto.ProductsDto, e.ApiError) {
 		productsAux.Stock = productsModel[k].Stock
 		productsDto = append(productsDto, productsAux)
 	}
+	return productsDto, nil
+}
+func (s *productService) GetProductsCart(products dto.IdProCart) ([]dto.ProductCart, e.ApiError) {
+	var id_products []int
+	var intAux int
+	for k := 0; k < len(products.Id_products); k++ {
+		intAux, _ = strconv.Atoi(products.Id_products[k])
+		id_products = append(id_products, intAux)
+	}
+
+	var productsModel []model.Product = productCliente.GetProductCart(id_products)
+	var productsDto []dto.ProductCart
+	var productAux dto.ProductCart
+	log.Debug("Productos Carrito", productsModel)
+	if productsModel[0].Id_Product == 0 {
+		productsDto = nil
+		return productsDto, e.NewBadRequestApiError("Bad products request")
+	}
+	for k := 0; k < len(productsModel); k++ {
+		productAux.Id_Product = productsModel[k].Id_Product
+		productAux.Name_product = productsModel[k].Name_product
+		productAux.Price = productsModel[k].Price
+		productsDto = append(productsDto, productAux)
+	}
+	log.Debug("DTO DETALLE: ", productsDto)
 	return productsDto, nil
 }

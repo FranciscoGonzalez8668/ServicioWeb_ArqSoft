@@ -22,6 +22,16 @@ func GetProductByName(key string) []model.Product {
 	return products
 }
 
+func GetProductCart(id_products []int) []model.Product {
+	var products []model.Product
+	Db.Where("id_product IN (?)", id_products).Find(&products)
+	if products == nil {
+		log.Debug("Fue nulo")
+		products[0].Id_Product = 0
+	}
+	return products
+
+}
 func GetProductById(id_product int) model.Product {
 	var product model.Product
 
