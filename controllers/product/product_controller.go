@@ -65,5 +65,9 @@ func GetProductCart(c *gin.Context) {
 	}
 	products, err = service.ProductService.GetProductsCart(productsCart)
 	if err != nil {
+		log.Debug(err)
+		c.JSON(http.StatusBadRequest, products)
+		return
 	}
+	c.JSON(http.StatusOK, products)
 }

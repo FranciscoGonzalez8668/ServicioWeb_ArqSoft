@@ -7,7 +7,7 @@ type OrderDto struct {
 	Adress    AdressDto    `json:"adress"`
 }
 type NewOrderDto struct {
-	Id_User  int          `json:"id_user"`
+	Token    string       `json:"id_user"`
 	Detalles []DetalleDto `json:"detalles"`
 }
 

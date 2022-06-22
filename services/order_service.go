@@ -67,6 +67,7 @@ func (s *orderService) NewOrder(NewOrderDto dto.NewOrderDto) (dto.OrderDto, e.Ap
 	var order model.Order
 	var detalles []model.Detalle
 	var detalleAUX model.Detalle
+	var id_user = 1 //GETTOKEN()
 	var total float32 = 0
 
 	//falta escribir todos los datos en el producto para mostrar bien la order
@@ -78,7 +79,7 @@ func (s *orderService) NewOrder(NewOrderDto dto.NewOrderDto) (dto.OrderDto, e.Ap
 		total = total + NewOrderDto.Detalles[j].Price_det*float32(NewOrderDto.Detalles[j].Cant_det)
 	}
 	order.Total = total
-	order.Id_User = NewOrderDto.Id_User
+	order.Id_User = id_user
 	order = orderCliente.NewOrder(order, detalles)
 	log.Debug("newOrderClient Complete")
 	var orderDto dto.OrderDto
