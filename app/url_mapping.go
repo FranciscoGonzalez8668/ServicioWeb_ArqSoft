@@ -26,6 +26,10 @@ func mapUrls() {
 
 	router.GET("/product/cat/:KeyCat", productController.GetProductByCat) //product.Controller.GetProductByCat)//Traer Productos por Categoria
 
+	router.GET("/order/order:id_user", orderController.GetHistory)
+
+	router.POST("/order", orderController.NewOrder)
+
 	log.Info("Finishing mappings configurations")
 
 }
