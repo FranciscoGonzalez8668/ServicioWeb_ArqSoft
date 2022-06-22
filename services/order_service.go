@@ -73,10 +73,10 @@ func (s *orderService) NewOrder(NewOrderDto dto.NewOrderDto) (dto.OrderDto, e.Ap
 	//falta escribir todos los datos en el producto para mostrar bien la order
 	for j := 0; j < len(NewOrderDto.Detalles); j++ {
 		detalleAUX.Cantidad = NewOrderDto.Detalles[j].Cant_det
-		detalleAUX.Id_Product = NewOrderDto.Detalles[j].Product.Id_Product
-		detalleAUX.Precio_Moment = NewOrderDto.Detalles[j].Price_det
+		detalleAUX.Id_Product = NewOrderDto.Detalles[j].Id_product
+		detalleAUX.Precio_Moment = float32(NewOrderDto.Detalles[j].Precio_Moment)
 		detalles = append(detalles, detalleAUX)
-		total = total + NewOrderDto.Detalles[j].Price_det*float32(NewOrderDto.Detalles[j].Cant_det)
+		total = total + float32(NewOrderDto.Detalles[j].Precio_Moment)*float32(NewOrderDto.Detalles[j].Cant_det)
 	}
 	order.Total = total
 	order.Id_User = id_user

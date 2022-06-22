@@ -26,7 +26,7 @@ func GetHistory(c *gin.Context) {
 func NewOrder(c *gin.Context) {
 	var NewOrderDto dto.NewOrderDto
 	err := c.BindJSON(&NewOrderDto)
-
+	log.Debug(NewOrderDto)
 	if err != nil {
 		log.Error(err.Error())
 		c.JSON(http.StatusBadRequest, err.Error())

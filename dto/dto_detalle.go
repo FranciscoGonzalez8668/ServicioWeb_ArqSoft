@@ -5,6 +5,11 @@ type DetalleDto struct {
 	Price_det float32    `json:"price_det"`
 	Cant_det  int        `json:"cant_det"`
 }
+type DetalleOrdDto struct {
+	Id_product    int     `json:"id_product"`
+	Precio_Moment float64 `json:"cost"`
+	Cant_det      int     `json:"cant"`
+}
 
 type DetallesDto struct {
 	Detalles_id_usuario string       `json:"id_usuario"`
