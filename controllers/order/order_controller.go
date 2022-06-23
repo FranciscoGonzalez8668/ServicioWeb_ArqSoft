@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"pan/dto"
 	service "pan/services"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	log "github.com/sirupsen/logrus"
@@ -12,14 +11,12 @@ import (
 
 func GetHistory(c *gin.Context) {
 
-	id_user, _ := strconv.Atoi(c.Param("IU"))
-
-	ordersHistoryDto, err := service.OrderService.OrderHistory(id_user)
+	token := c.Param("IU")
+	ordersHistoryDto, err := service.OrderService.OrderHistory(token)
 	if err != nil {
 		c.JSON(err.Status(), err)
 		return
 	}
-	log.Debug("AH", ordersHistoryDto)
 
 	c.JSON(http.StatusOK, ordersHistoryDto)
 
@@ -28,7 +25,6 @@ func GetHistory(c *gin.Context) {
 func NewOrder(c *gin.Context) {
 	var NewOrderDto dto.NewOrderDto
 	err := c.BindJSON(&NewOrderDto)
-	log.Debug(NewOrderDto)
 	if err != nil {
 		log.Error(err.Error())
 		c.JSON(http.StatusBadRequest, err.Error())

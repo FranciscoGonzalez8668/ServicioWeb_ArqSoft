@@ -19,7 +19,7 @@ func GetDetalles(id_order int) []model.Detalle {
 }
 func GetOrders(id_user int) []model.Order {
 	var orders []model.Order
-	Db.Find(&orders)
+	Db.Where("id_user = ?", id_user).Find(&orders)
 	return orders
 }
 

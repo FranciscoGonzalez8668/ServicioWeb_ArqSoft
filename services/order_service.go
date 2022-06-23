@@ -1,6 +1,7 @@
 package services
 
 import (
+	"fmt"
 	orderCliente "pan/clients/order"
 	productClient "pan/clients/product"
 	userClient "pan/clients/user"
@@ -8,13 +9,14 @@ import (
 	"pan/model"
 	e "pan/utils/errors"
 
+	"github.com/golang-jwt/jwt"
 	log "github.com/sirupsen/logrus"
 )
 
 type orderService struct{}
 
 type orderServiceInterface interface {
-	OrderHistory(int) (dto.OrdersHistoryDto, e.ApiError)
+	OrderHistory(string) (dto.OrdersHistoryDto, e.ApiError)
 	NewOrder(NewOrderDto dto.NewOrderDto) (dto.OrderDto, e.ApiError)
 }
 
@@ -25,11 +27,34 @@ var (
 func init() {
 	OrderService = &orderService{}
 }
+func getUserFromToken(receivedToken string) (int, error) {
+	log.Debug("AK")
+	token, err := jwt.Parse(receivedToken, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			log.Debug("1")
+			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+		}
+		log.Debug("2")
+		return JwtKey, nil
+	})
+	log.Debug("TOKENOTKEONT", token)
+	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+		usId := (claims["Id_User"].(float64))
+		usIntId := int(usId)
+		return usIntId, nil
+	} else {
+		log.Debug("4")
+		return -1, err
+	}
 
-func (s *orderService) OrderHistory(idUser int) (dto.OrdersHistoryDto, e.ApiError) {
+}
+
+func (s *orderService) OrderHistory(Token string) (dto.OrdersHistoryDto, e.ApiError) {
 	var orders []model.Order
 	var detalles []model.Detalle
 	var addres model.Adress
+	idUser, err := getUserFromToken(Token)
+	//Funcion de verificar token
 
 	var orderAux dto.OrderDto
 	var detalleAUX dto.DetalleDto
@@ -45,11 +70,14 @@ func (s *orderService) OrderHistory(idUser int) (dto.OrdersHistoryDto, e.ApiErro
 	addresAux.Number = addres.Number
 	addresAux.Street_Name = addres.Street_Name
 	addresAux.Neighborhood = addres.Neighborhood
+	if err != nil {
+		return order, e.NewBadRequestApiError("Token Invalida")
+	}
 
 	// seteo de []order.orderhistorydto lugar por lugar
 	for j := 0; j < len(orders); j++ {
 		detalles = orderCliente.GetDetalles(orders[j].Id_Order)
-
+		orderAux.Det_order = nil
 		for k := 0; k < len(detalles); k++ {
 			// seteo del producto dentro del detalleAUX a insertar
 			product = productClient.GetProductById(detalles[k].Id_Product)
@@ -81,7 +109,7 @@ func (s *orderService) NewOrder(NewOrderDto dto.NewOrderDto) (dto.OrderDto, e.Ap
 	var order model.Order
 	var detalles []model.Detalle
 	var detalleAUX model.Detalle
-	var id_user = 1 //GETTOKEN()
+	id_user, err := getUserFromToken(NewOrderDto.Token)
 	var total float32 = 0
 
 	//falta escribir todos los datos en el producto para mostrar bien la order
@@ -97,6 +125,9 @@ func (s *orderService) NewOrder(NewOrderDto dto.NewOrderDto) (dto.OrderDto, e.Ap
 	order = orderCliente.NewOrder(order, detalles)
 	log.Debug("newOrderClient Complete")
 	var orderDto dto.OrderDto
+	if err != nil {
+		return orderDto, e.NewBadRequestApiError("Token Invalida")
+	}
 	if order.Id_Order == 0 {
 		return orderDto, e.NewBadRequestApiError("No stock enought")
 	}

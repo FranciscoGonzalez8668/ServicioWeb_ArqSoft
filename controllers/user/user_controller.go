@@ -7,7 +7,7 @@ import (
 	service "pan/services"
 
 	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt"
+	//"github.com/golang-jwt/jwt"
 	log "github.com/sirupsen/logrus"
 	//"strconv"
 )
@@ -34,7 +34,7 @@ func LoginUser(c *gin.Context) {
 		return
 	}
 
-	tkn, err := jwt.Parse(tokenDto.Token, func(t *jwt.Token) (interface{}, error) { return jwtKey, nil })
+	/*tkn, err := jwt.Parse(tokenDto.Token, func(t *jwt.Token) (interface{}, error) { return jwtKey, nil })
 
 	if err != nil {
 		if err == jwt.ErrSignatureInvalid {
@@ -48,7 +48,7 @@ func LoginUser(c *gin.Context) {
 	if !tkn.Valid {
 		c.JSON(http.StatusUnauthorized, "Invalid Token")
 		return
-	}
+	}*/
 	log.Debug(tokenDto)
 	c.JSON(http.StatusCreated, tokenDto)
 	//falta seguir con cosas del servis que aun no estan implementadas

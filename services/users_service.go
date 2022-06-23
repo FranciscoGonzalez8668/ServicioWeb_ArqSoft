@@ -23,7 +23,12 @@ func init() {
 	UserService = &userService{}
 }
 
-var jwtKey = []byte("secret_key")
+var JwtKey = []byte("secret_key")
+
+type MyCustomeClaims struct {
+	Id_User int `json:"Id_User"`
+	jwt.StandardClaims
+}
 
 func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.Token, e.ApiError) {
 	var user model.User = userCliente.GetUserByEmail(loginDto)
@@ -33,12 +38,15 @@ func (s *userService) LoginUser(loginDto dto.LoginDto) (dto.Token, e.ApiError) {
 	if user.Id_user == 0 {
 		return tokenDto, e.NewBadRequestApiError("User not found")
 	}
-
 	if user.Password == loginDto.Password {
-		token := jwt.New(jwt.SigningMethodHS256)
-		tokenString, _ := token.SignedString(jwtKey)
+		claims := &MyCustomeClaims{
+			user.Id_user,
+			jwt.StandardClaims{},
+		}
+		token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
+
+		tokenString, _ := token.SignedString(JwtKey)
 		tokenDto.Token = tokenString
-		tokenDto.Id_user = user.Id_user
 	}
 	return tokenDto, nil
 }
