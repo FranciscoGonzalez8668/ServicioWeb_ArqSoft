@@ -19,6 +19,8 @@ func GetHistory(c *gin.Context) {
 		c.JSON(err.Status(), err)
 		return
 	}
+	log.Debug("AH", ordersHistoryDto)
+
 	c.JSON(http.StatusOK, ordersHistoryDto)
 
 }

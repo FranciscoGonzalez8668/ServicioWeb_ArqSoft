@@ -1,7 +1,7 @@
 package dto
 
 type OrderDto struct {
-	Id_order  int          `json:"id_user"`
+	Id_order  int          `json:"id_order"`
 	Total     float32      `json:"total"`
 	Det_order []DetalleDto `json:"det_orden"`
 	Adress    AdressDto    `json:"adress"`

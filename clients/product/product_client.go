@@ -17,7 +17,6 @@ var Db *gorm.DB
 func GetProductByName(key string) []model.Product {
 	var products []model.Product
 	Db.Where("name_product LIKE ?", key+"%").Find(&products)
-	log.Debug("products: ", products)
 
 	return products
 }
@@ -36,7 +35,6 @@ func GetProductById(id_product int) model.Product {
 	var product model.Product
 
 	Db.Where("id_product = ?", id_product).First(&product)
-	log.Debug("Product: ", product)
 
 	return product
 }

@@ -33,3 +33,11 @@ func GetUserByEmail(LoginDto dto.LoginDto) model.User {
 	//Db.Where("email= ? AND password= ?", LoginDto.Email, LoginDto.Password).First(&user) //No se creo la base de datos todavia
 	return user
 }
+func GetAdress(idUser int) model.Adress {
+	var adress model.Adress
+
+	Db.Where("id_user = ?", idUser).First(&adress)
+
+	return adress
+
+}

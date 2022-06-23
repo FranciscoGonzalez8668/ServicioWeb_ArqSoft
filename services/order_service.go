@@ -3,6 +3,7 @@ package services
 import (
 	orderCliente "pan/clients/order"
 	productClient "pan/clients/product"
+	userClient "pan/clients/user"
 	"pan/dto"
 	"pan/model"
 	e "pan/utils/errors"
@@ -28,18 +29,27 @@ func init() {
 func (s *orderService) OrderHistory(idUser int) (dto.OrdersHistoryDto, e.ApiError) {
 	var orders []model.Order
 	var detalles []model.Detalle
+	var addres model.Adress
 
 	var orderAux dto.OrderDto
 	var detalleAUX dto.DetalleDto
 	var productAUX dto.ProductDto
 	var product model.Product
 	var order dto.OrdersHistoryDto
+	var addresAux dto.AdressDto
 	orders = orderCliente.GetOrders(idUser)
-	log.Debug("Ordenes: ", orders)
+	addres = userClient.GetAdress(idUser)
+
+	addresAux.City = addres.City
+	addresAux.Id_adress = addres.Id_adress
+	addresAux.Number = addres.Number
+	addresAux.Street_Name = addres.Street_Name
+	addresAux.Neighborhood = addres.Neighborhood
 
 	// seteo de []order.orderhistorydto lugar por lugar
 	for j := 0; j < len(orders); j++ {
 		detalles = orderCliente.GetDetalles(orders[j].Id_Order)
+
 		for k := 0; k < len(detalles); k++ {
 			// seteo del producto dentro del detalleAUX a insertar
 			product = productClient.GetProductById(detalles[k].Id_Product)
@@ -56,8 +66,12 @@ func (s *orderService) OrderHistory(idUser int) (dto.OrdersHistoryDto, e.ApiErro
 			orderAux.Det_order = append(orderAux.Det_order, detalleAUX)
 
 		}
+		orderAux.Id_order = orders[j].Id_Order
+		orderAux.Total = orders[j].Total
+		orderAux.Adress = addresAux
 		// setup historial con auxiliares
 		order.Order = append(order.Order, orderAux)
+
 	}
 	order.Id_User = idUser
 	return order, nil
